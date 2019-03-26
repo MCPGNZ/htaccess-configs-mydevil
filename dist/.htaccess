@@ -36,7 +36,7 @@
 
 <IfModule mod_setenvif.c>
     <IfModule mod_headers.c>
-        <FilesMatch "\.(bmp|cur|gif|ico|jpe?g|png|svgz?|webp)$">
+        <FilesMatch "\.(bmp|cur|gif|ico|jpe?g|png|svgz?|tiff?|webp)$">
             SetEnvIf Origin ":" IS_CORS
             Header set Access-Control-Allow-Origin "*" env=IS_CORS
         </FilesMatch>
@@ -152,7 +152,7 @@ Options -MultiViews
     AddType application/rss+xml                         rss
     AddType application/geo+json                        geojson
     AddType application/rdf+xml                         rdf
-    AddType application/xml                             xml
+    AddType application/xml                             xml xsd xsl
 
 
   # JavaScript
@@ -174,13 +174,16 @@ Options -MultiViews
 
     AddType audio/mp4                                   f4a f4b m4a
     AddType audio/ogg                                   oga ogg opus
+    AddType audio/wav                                   wav wave
+    AddType audio/x-ms-wax                              wax
+    AddType audio/x-ms-wma                              wma
     AddType image/bmp                                   bmp
     AddType image/svg+xml                               svg svgz
     AddType image/webp                                  webp
     AddType video/mp4                                   f4v f4p m4v mp4
     AddType video/ogg                                   ogv
     AddType video/webm                                  webm
-    AddType video/x-flv                                 flv
+    AddType video/x-matroska                            mkv mk3d mks
 
     # Serving `.ico` image files with a different media type
     # prevents Internet Explorer from displaying them as images:
@@ -204,19 +207,69 @@ Options -MultiViews
     AddType font/otf                                    otf
 
 
+  # Archive files
+
+    AddType application/x-tar                           tar
+
+
+  # Office files
+
+    AddType application/msword                                                           doc dot
+    AddType application/vnd.ms-word.document.macroenabled.12                             docm
+    AddType application/vnd.ms-word.template.macroenabled.12                             dotm
+    AddType application/vnd.ms-excel                                                     xls xlm xla xlc xlt xlw
+    AddType application/vnd.ms-excel.addin.macroenabled.12                               xlam
+    AddType application/vnd.ms-excel.sheet.binary.macroenabled.12                        xlsb
+    AddType application/vnd.ms-excel.sheet.macroenabled.12                               xlsm
+    AddType application/vnd.ms-excel.template.macroenabled.12                            xltm
+    AddType application/vnd.ms-access                                                    mdb
+    AddType application/vnd.ms-project                                                   mpp mpt
+    AddType application/vnd.ms-powerpoint                                                ppt pps pot
+    AddType application/vnd.ms-powerpoint.addin.macroenabled.12                          ppam
+    AddType application/vnd.ms-powerpoint.presentation.macroenabled.12                   pptm
+    AddType application/vnd.ms-powerpoint.slide.macroenabled.12                          sldm
+    AddType application/vnd.ms-powerpoint.slideshow.macroenabled.12                      ppsm
+    AddType application/vnd.ms-powerpoint.template.macroenabled.12                       potm
+    AddType application/vnd.oasis.opendocument.chart                                     odc
+    AddType application/vnd.oasis.opendocument.chart-template                            otc
+    AddType application/vnd.oasis.opendocument.database                                  odb
+    AddType application/vnd.oasis.opendocument.formula                                   odf
+    AddType application/vnd.oasis.opendocument.formula-template                          odft
+    AddType application/vnd.oasis.opendocument.graphics                                  odg
+    AddType application/vnd.oasis.opendocument.graphics-template                         otg
+    AddType application/vnd.oasis.opendocument.image                                     odi
+    AddType application/vnd.oasis.opendocument.image-template                            oti
+    AddType application/vnd.oasis.opendocument.presentation                              odp
+    AddType application/vnd.oasis.opendocument.presentation-template                     otp
+    AddType application/vnd.oasis.opendocument.spreadsheet                               ods
+    AddType application/vnd.oasis.opendocument.spreadsheet-template                      ots
+    AddType application/vnd.oasis.opendocument.text                                      odt
+    AddType application/vnd.oasis.opendocument.text-master                               odm
+    AddType application/vnd.oasis.opendocument.text-template                             ott
+    AddType application/vnd.oasis.opendocument.text-web                                  oth
+    AddType application/vnd.openxmlformats-officedocument.presentationml.presentation    pptx
+    AddType application/vnd.openxmlformats-officedocument.presentationml.slide           sldx
+    AddType application/vnd.openxmlformats-officedocument.presentationml.slideshow       ppsx
+    AddType application/vnd.openxmlformats-officedocument.presentationml.template        potx
+    AddType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet            xlsx
+    AddType application/vnd.openxmlformats-officedocument.spreadsheetml.template         xltx
+    AddType application/vnd.openxmlformats-officedocument.wordprocessingml.document      docx
+    AddType application/vnd.openxmlformats-officedocument.wordprocessingml.template      dotx
+
+
   # Other
 
     AddType application/octet-stream                    safariextz
     AddType application/x-bb-appworld                   bbaw
     AddType application/x-chrome-extension              crx
     AddType application/x-opera-extension               oex
-    AddType application/x-xpinstall                     xpi
     AddType text/calendar                               ics
+    AddType text/csv                                    csv
     AddType text/markdown                               markdown md
+    AddType text/richtext                               rtx
     AddType text/vcard                                  vcard vcf
     AddType text/vnd.rim.location.xloc                  xloc
     AddType text/vtt                                    vtt
-    AddType text/x-component                            htc
 
 </IfModule>
 
@@ -679,29 +732,6 @@ AddDefaultCharset utf-8
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Disable TRACE HTTP Method                                          |
-# ----------------------------------------------------------------------
-
-# Prevent Apache from responding to `TRACE` HTTP request.
-#
-# The TRACE method, while apparently harmless, can be successfully
-# leveraged in some scenarios to steal legitimate users' credentials
-#
-# Modern browsers now prevent TRACE requests being made via JavaScript,
-# however, other ways of sending TRACE requests with browsers have been
-# discovered, such as using Java.
-#
-# (!) The `TraceEnable` directive will only work in the main server
-# configuration file, so don't try to enable it in the `.htaccess` file!
-#
-# https://tools.ietf.org/html/rfc7231#section-4.3.8
-# https://www.owasp.org/index.php/Cross_Site_Tracing
-# https://www.owasp.org/index.php/Test_HTTP_Methods_(OTG-CONFIG-006)
-# https://httpd.apache.org/docs/current/mod/core.html#traceenable
-
-# TraceEnable Off
-
-# ----------------------------------------------------------------------
 # | Server-side technology information                                 |
 # ----------------------------------------------------------------------
 
@@ -736,19 +766,6 @@ AddDefaultCharset utf-8
 # https://httpd.apache.org/docs/current/mod/core.html#serversignature
 
 ServerSignature Off
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-# Prevent Apache from sending in the `Server` response header its
-# exact version number, the description of the generic OS-type or
-# information about its compiled-in modules.
-#
-# (!) The `ServerTokens` directive will only work in the main server
-# configuration file, so don't try to enable it in the `.htaccess` file!
-#
-# https://httpd.apache.org/docs/current/mod/core.html#servertokens
-
-# ServerTokens Prod
 
 # ######################################################################
 # # WEB PERFORMANCE                                                    #
@@ -792,6 +809,7 @@ ServerSignature Off
                                       "application/wasm" \
                                       "application/x-font-ttf" \
                                       "application/x-javascript" \
+                                      "application/x-tar" \
                                       "application/x-web-app-manifest+json" \
                                       "application/xhtml+xml" \
                                       "application/xml" \
@@ -804,10 +822,12 @@ ServerSignature Off
                                       "text/cache-manifest" \
                                       "text/calendar" \
                                       "text/css" \
+                                      "text/csv" \
                                       "text/html" \
                                       "text/javascript" \
                                       "text/plain" \
                                       "text/markdown" \
+                                      "text/richtext" \
                                       "text/vcard" \
                                       "text/vnd.rim.location.xloc" \
                                       "text/vtt" \
@@ -1057,6 +1077,10 @@ FileETag None
     ExpiresByType text/cache-manifest                   "access plus 0 seconds"
 
 
+  # Plain text
+
+    ExpiresByType text/plain                            "access plus 1 day"
+
   # Markdown
 
     ExpiresByType text/markdown                         "access plus 0 seconds"
@@ -1164,6 +1188,6 @@ FileETag None
 # <IfModule mod_rewrite.c>
 #     RewriteEngine On
 #     RewriteCond %{REQUEST_FILENAME} !-f
-#     RewriteRule ^(.+)\.(\w+)\.(bmp|css|cur|gif|ico|jpe?g|m?js|png|svgz?|webp|webmanifest)$ $1.$3 [L]
+#     RewriteRule ^(.+)\.(\w+)\.(bmp|css|cur|gif|ico|jpe?g|m?js|png|svgz?|tiff?|webp|webmanifest)$ $1.$3 [L]
 # </IfModule>
 

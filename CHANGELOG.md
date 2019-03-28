@@ -1,3 +1,16 @@
+### 1.0.0 (March 29, 2019)
+* Update to the newest h5bp/server-configs-apache 
+  [[04b2de9](https://github.com/rechandler12/htaccess-configs-mydevil/commit/04b2de9aabb79b5094741e0e8b89c8b1c14fd35d)]
+* Add new MIME based on MyDevil configuration 
+  [[50ecb46](https://github.com/rechandler12/htaccess-configs-mydevil/commit/50ecb465d871df1f92bfd9ba6ddacacdf9486700)] 
+  [[6a3033a](https://github.com/rechandler12/htaccess-configs-mydevil/commit/6a3033a327588f3efcdeb885dc3199cb713c8e3f)]
+* Prepared `mime.types` for tests based on MyDevil configuration 
+  [[b8af0b3](https://github.com/rechandler12/htaccess-configs-mydevil/commit/b8af0b3e0986aad33f5f396379b5d0002e1355a8)]
+* Remove options required access to nginx configuration 
+  [[81ca534](https://github.com/rechandler12/htaccess-configs-mydevil/commit/81ca5345107f1eb92e9f4f805bc74d861f0c0b33)]
+
+## Created MyDevil .htaccess Configs (forked from [h5bp/server-configs-apache](https://github.com/h5bp/server-configs-apache)) (March 21, 2019)
+
 ### 3.1.0 (February 8, 2019)
 
 * Remove P3P iframe cookies directives 

@@ -1,20 +1,22 @@
 {
-  "name": "server-configs-apache",
-  "version": "3.1.0",
-  "author": "The H5BP Team",
-  "description": "Boilerplate configurations for the Apache HTTP server",
-  "repository": "h5bp/server-configs-apache",
+  "name": "htaccess-configs-mydevil",
+  "version": "1.0.0",
+  "author": "rechandler12",
+  "description": ".htaccess boilerplate configs for MyDevil hosting",
+  "repository": "rechandler12/htaccess-configs-mydevil",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/h5bp/server-configs-apache/issues"
+    "url": "https://github.com/rechandler12/htaccess-configs-mydevil/issues"
   },
-  "homepage": "https://github.com/h5bp/server-configs-apache#readme",
+  "homepage": "https://github.com/rechandler12/htaccess-configs-mydevil#readme",
   "keywords": [
     "apache",
     "boilerplate",
     "configs",
     "configurations",
-    "h5bp",
+    "mydevil",
+    "nginx",
+    "rechandler12",
     "server",
     "template"
   ],

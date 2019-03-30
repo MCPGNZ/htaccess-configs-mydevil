@@ -1,6 +1,6 @@
 # https://docs.travis-ci.com/
 
-language: minimal
+language: generic
 
 services:
   - docker
@@ -40,14 +40,18 @@ jobs:
       before_deploy: ./bin/build.sh dist/.htaccess htaccess.conf
       deploy:
         - provider: releases
-          api_key: $GITHUB_API_TOKEN
+          api_key:
+            secure: beZWQmhFnnawhOs7f8HO5Om4P5HwRZf5uWAMHb4syThMUdIe4Y5HrJNdItVysBxvshgQCIa76OPna7Rtcho58PR4epXesw/d+xWJ8b5Dd8Qy23qWQFudxrr0ZDUA8ds9x8xvZtNNkdJJjHr+d+1p6GlPqsPi7Agn4aKRty++v2iKcqLXAkKWwdekbwmrz24q8l2kTyUugpYv19v0UWP/F57OYzaRBOSiIKoXKH+Ag+W+ykedlYgpkyaK2NOM0rsOy19mUNIawq4nIfiDhyOGNH/cnD9TC2fIUGp0prpot1vVIn2PkCTi/K8chB8yArm37OnYeeR0A4DOxC4bp6QAA0CqZ/qwz587bBISrCFGtGqFKW/fbpTWdHHuUnCcyTzQi+6fornb0K8gVRmN9fV2By++PEXpm/J2eSR3XZCsspfg/meiyuacqXfx8mgTQLyDlw5osp84f5YPnbnA7t86PP+YsW+UUYOaXA0VBvwI+fwEz98gTwPy1cJ+qLv2MjEuVpgOxQIIjFtoRbt/BpIvGah8g1zheY6l5Q4f9NkLPK+HddyAOqbCp22IEgWEZzXWjhO74Cec9vnhg7QBMFowg/d7WR72sc2j1zDcbRwGFVS441eder/vo0JjQgL5jvQJljpe/Ep30m3ykpMS+CZEKv2YJx9jRZiGmo1IC5OLAgo=
           file: dist/.htaccess
           skip_cleanup: true
           on:
             tags: true
+            repo: rechandler12/htaccess-configs-mydevil
         - provider: npm
-          email: $NPM_API_EMAIL
-          api_key: $NPM_API_TOKEN
+          email: juliusz.marciniak@gmail.com
+          api_key:
+            secure: DBwallcimQ2vAtQ4rCkq7AfvXhRxzonLnnYx9zdlNJnQw2Yab0NEzKFnB/nivAIs1PMlD7yKj6vhImW2JKNWL8E3lY0VbT+pOpUxV9bDCoWdCqBW+0elDljuseHyty6qH/iwRdtXCmDm+w32/w/nysmJcsO3ZlvmDgEH0ApoCgJ7oUT3LSgIY8RPgQI2LOsFQZDizb05+AESYMGrmZ4RG5LxAgF5Ghqpks5daVnShiaHtozVbPbpuOF26U7GB4qFQGk9MTkb/K33TscClL2TYz9Gbnr+9uU+QItK5Gknr0Bwe68QdPUEEP3iAcJTIhGMxzNTkPRf8orNR2ckyJbwMvEtCM2TJN+lP+1XLkDrybpcBO22ZJKgjf1Pd7DZSes9f75AhwkSF8idpfU59bxYJrCLhrQ9I8L8eMBlmia6HbaAYoQpya3nlOiX582uGU33iFMjHVgOZ0fKcu3JJ+Vv4YzDJJpEwo4Z8cyGlZmVnPl9RiAq+tnNouX22JfRqpqBmAn284Yoc4ick7DKPoQ4W1QVDlAJBFX2+Ktj0vJzrYKrc3gBIwv88oMLuRFeVsl8o8+bHu99933v6wXZgH9/KbR2XqOe+e8Xy5hRuBApH8mm+OkP0ZGyz2rNKL0nCJBlNy9DrDcQjTG8QEE4uYSP9e6xAeltD7z1rjbbGNkPuiI=
           skip_cleanup: true
           on:
             tags: true
+            repo: rechandler12/htaccess-configs-mydevil

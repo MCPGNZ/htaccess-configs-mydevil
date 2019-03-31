@@ -1,4 +1,7 @@
-### 1.0.0 (March 29, 2019)
+### 1.0.1 (March 31, 2019)
+* Release to NPM
+
+### 1.0.0 (March 31, 2019)
 * Update to the newest h5bp/server-configs-apache 
   [[04b2de9](https://github.com/rechandler12/htaccess-configs-mydevil/commit/04b2de9aabb79b5094741e0e8b89c8b1c14fd35d)]
 * Add new MIME based on MyDevil configuration 

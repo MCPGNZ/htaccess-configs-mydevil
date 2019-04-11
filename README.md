@@ -134,7 +134,48 @@ $ path/to/htaccess-configs-mydevil/bin/build.sh ./.htaccess ~/htaccess.conf
   * Internet Explorer 8+
   * Opera 12+
   * Safari 5+
+  
+### Unsupported modules from original project
+#### Custom error messages/pages
+MyDevil does not support ```ErrorDocument```. However, there is a workaround. You can create custom error pages in directory ```/errors/xxx.html``` when xxx is HTTP code.
 
+Link to the official documentation (in polish): [Własne strony błędów](https://wiki.mydevil.net/PHP#W.C5.82asne_strony_b.C5.82.C4.99d.C3.B3w)
+
+#### Disable TRACE HTTP Method
+
+Due to the lack of access to the main configuration, the option is not available.
+
+#### Server-side technology information
+
+MyDevil does not support ```Header unset```. There is no workaround at the moment.
+
+#### ServerTokens Prod
+
+Due to the lack of access to the main configuration, the option is not available.
+
+#### Compression
+
+MyDevil does not support ```AddOutputFilterByType DEFLATE```. However, there is a workaround. You can enable GZIP compression at your page settings.
+
+Link to the official documentation (in polish): [Strona WWW/PHP](https://wiki.mydevil.net/Strona_WWW#PHP)
+
+#### Brotli/GZip pre-compressed content
+
+Due to the lack of compression, the option is also not available.
+
+#### ETags
+
+MyDevil does not support ```Header unset```. There is no workaround at the moment.
+
+#### File concatenation
+
+MyDevil does not support
+```
+Options +Includes
+AddOutputFilterByType INCLUDES
+SetOutputFilter INCLUDES
+```
+There is no workaround at the moment.
 
 ## Contributing
 

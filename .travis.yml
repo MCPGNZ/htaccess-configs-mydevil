@@ -20,7 +20,7 @@ jobs:
   include:
     - name: "Server Config Tests"
       install:
-        - curl -sSL https://github.com/rechandler12/htaccess-configs-mydevil-test/releases/download/v1.0.0/htaccess-configs-mydevil-test.tar.gz | tar -xz -C test/
+        - curl -sSL https://github.com/rechandler12/htaccess-configs-mydevil-test/releases/download/v1.0.1/htaccess-configs-mydevil-test.tar.gz | tar -xz -C test/
         - ./bin/build.sh test/fixtures/.htaccess test/build/htaccess_fixture.conf
       before_script:
         - docker pull httpd
@@ -30,7 +30,7 @@ jobs:
             -v $TRAVIS_BUILD_DIR/test/vhosts/httpd.conf:/usr/local/apache2/conf/httpd.conf \
             -v $TRAVIS_BUILD_DIR/test/vhosts/mime.types:/usr/local/apache2/conf/mime.types \
             httpd
-      script: ./test/bin/k6 run test/lib/index.js -e TESTS=basic-file-access:cache-busting:custom-errors:forbidden-files:enforce-gzip:precompressed-files-gzip:concatenation
+      script: ./test/bin/k6 run test/lib/index.js -e TESTS=basic-file-access:cache-busting:forbidden-files
       after_success: ./test/bin/k6 run test/lib/benchmark.js
       after_failure:
         - docker ps -a

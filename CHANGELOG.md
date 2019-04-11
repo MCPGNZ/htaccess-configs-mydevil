@@ -1,3 +1,7 @@
+### 1.0.1 (April 11, 2019)
+* Remove of unsupported options
+  [[a252969]](https://github.com/rechandler12/htaccess-configs-mydevil/commit/a25296972ba2e5e5f9361f2e9c3ffee9bebffdb0)
+
 ### 1.0.1 (March 31, 2019)
 * Release to NPM
 

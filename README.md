@@ -14,7 +14,7 @@ This is a fork of the [Apache Server Configs](https://github.com/h5bp/server-con
 
 There are a few options for getting the MyDevil .htaccess configs:
 
-* Download the [zip archive](https://github.com/rechandler12/htaccess-configs-mydevil/archive/v1.0.1.zip)
+* Download the [zip archive](https://github.com/rechandler12/htaccess-configs-mydevil/archive/v1.0.2.zip)
 * Install them via [npm](https://www.npmjs.com/):
   `npm install --save-dev htaccess-configs-mydevil`
 

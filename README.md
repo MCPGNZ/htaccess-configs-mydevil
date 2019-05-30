@@ -34,7 +34,7 @@ The [**build script**](#build-script-buildsh) with its re-usable and customizabl
 
 ### Configuration file: *htaccess.conf*
 
-Allows you to define which module to [enable](#enabling-modules) or [disable](#disabling-modules) for your project. Just copy the default [**htaccess.conf**](https://github.com/rechandler12/htaccess-configs-mydevil/blob/master/htaccess.conf) from this repo into your project directory. Adjust to your needs, and/or [add custom code](#adding-custom-modules) snippets you need for your project. Its syntax is straight and pretty much self-explanatory:
+Allows you to define which module to [enable](#enabling-modules) or [disable](#disabling-modules) for your project. Just copy the default [**htaccess.conf**](https://github.com/rechandler12/htaccess-configs-mydevil/blob/master/bin/htaccess.conf) from this repo into your project directory. Adjust to your needs, and/or [add custom code](#adding-custom-modules) snippets you need for your project. Its syntax is straight and pretty much self-explanatory:
 
 ```
 # Example Module
@@ -95,7 +95,7 @@ enable "config/framework_rewrites.conf"
 Dive into your project root and call the build script from wherever you cloned the repo. Here are three examples:
 
 **1. Create a default .htaccess**  
-in current work directory. An existing **htaccess.conf** in this directory will be used; if none is present, the [**default configuration**](https://github.com/rechandler12/htaccess-configs-mydevil/blob/master/htaccess.conf) will apply.
+in current work directory. An existing **htaccess.conf** in this directory will be used; if none is present, the [**default configuration**](https://github.com/rechandler12/htaccess-configs-mydevil/blob/master/bin/htaccess.conf) will apply.
 
 
 ```bash

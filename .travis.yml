@@ -1,6 +1,6 @@
 # https://docs.travis-ci.com/
 
-language: generic
+language: minimal
 
 services:
   - docker
@@ -27,7 +27,7 @@ jobs:
         - |
           docker run -d -p 80:80 -p 443:443 --name server \
             -v $TRAVIS_BUILD_DIR/test/fixtures:/usr/local/apache2/htdocs \
-            -v $TRAVIS_BUILD_DIR/test/vhosts/httpd.conf:/usr/local/apache2/conf/httpd.conf \
+            -v $TRAVIS_BUILD_DIR/test/vhosts/.htaccess.server.localhost.conf:/usr/local/apache2/conf/httpd.conf \
             -v $TRAVIS_BUILD_DIR/test/vhosts/mime.types:/usr/local/apache2/conf/mime.types \
             httpd
       script: ./test/bin/k6 run test/lib/index.js -e TESTS=basic-file-access:cache-busting:forbidden-files
@@ -36,13 +36,17 @@ jobs:
         - docker ps -a
         - docker logs server
     - name: "Build Tests"
+      language: node_js
+      node_js: node
       script: ./test/build/test_userbuild.sh
-      before_deploy: ./bin/build.sh dist/.htaccess htaccess.conf
+      before_deploy:
+        - ./bin/build.sh dist/.htaccess bin/htaccess.conf
+        - ./bin/build.sh dist/mydevil.htaccess bin/htaccess.conf
       deploy:
         - provider: releases
           api_key:
             secure: beZWQmhFnnawhOs7f8HO5Om4P5HwRZf5uWAMHb4syThMUdIe4Y5HrJNdItVysBxvshgQCIa76OPna7Rtcho58PR4epXesw/d+xWJ8b5Dd8Qy23qWQFudxrr0ZDUA8ds9x8xvZtNNkdJJjHr+d+1p6GlPqsPi7Agn4aKRty++v2iKcqLXAkKWwdekbwmrz24q8l2kTyUugpYv19v0UWP/F57OYzaRBOSiIKoXKH+Ag+W+ykedlYgpkyaK2NOM0rsOy19mUNIawq4nIfiDhyOGNH/cnD9TC2fIUGp0prpot1vVIn2PkCTi/K8chB8yArm37OnYeeR0A4DOxC4bp6QAA0CqZ/qwz587bBISrCFGtGqFKW/fbpTWdHHuUnCcyTzQi+6fornb0K8gVRmN9fV2By++PEXpm/J2eSR3XZCsspfg/meiyuacqXfx8mgTQLyDlw5osp84f5YPnbnA7t86PP+YsW+UUYOaXA0VBvwI+fwEz98gTwPy1cJ+qLv2MjEuVpgOxQIIjFtoRbt/BpIvGah8g1zheY6l5Q4f9NkLPK+HddyAOqbCp22IEgWEZzXWjhO74Cec9vnhg7QBMFowg/d7WR72sc2j1zDcbRwGFVS441eder/vo0JjQgL5jvQJljpe/Ep30m3ykpMS+CZEKv2YJx9jRZiGmo1IC5OLAgo=
-          file: dist/.htaccess
+          file: dist/mydevil.htaccess
           skip_cleanup: true
           on:
             tags: true
